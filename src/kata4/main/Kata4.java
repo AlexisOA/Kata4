@@ -24,14 +24,30 @@ public class Kata4 {
      * @param args the command line arguments
      */
      public static void main(String[] args) throws Exception {
+          execute();
+    }
+     
+     public static void execute() throws Exception{
+        List<Mail> mailList = input();
+        Histogram<String> histogram = process(mailList);
+        output(histogram);
+    }
+     
+     public static List<Mail> input() throws Exception{
          String fileName = "email.txt";
-        List<Mail> mailList = null;
-        try{
-            mailList = new MailListReader().read(fileName);
-        } catch (IOException ex) {
-            
-       }
-        Histogram<String> histogram = new MailHistogramBuilder().build(mailList);
+         try{
+             return new MailListReader().read(fileName);
+         } catch (IOException ex) {
+             
+         }
+         return null;
+    }
+     
+     public static Histogram<String> process(List<Mail> mailList){
+         return new MailHistogramBuilder().build(mailList);
+    }
+    
+    public static void output(Histogram<String> histogram){
         new HistogramDisplay(histogram).execute();
     }
     
